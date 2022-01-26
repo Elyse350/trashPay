@@ -1,17 +1,24 @@
-import express from "express"; 
-import dataController from "../controller/dataController"
-const dataRouter = express.Router();
+import express from "express";
+import houseController from "../controller/dataController";
+import Validator from "../middleware/validator";
+import DataChecker from "../middleware/datachecker";
+import VerifyToken from "../middleware/verifyToken";
+import VerifyAccess from "../middleware/verifyAccess";
+const houseRouter = express.Router();
 
-dataRouter.post("/house", dataController.createInfos);
-dataRouter.get("/getallhouse", dataController.getAllhouseInfos);
+houseRouter.post(
+  "/house",
+  VerifyToken,
+  VerifyAccess("Landlord"),
+  Validator.newAcccounthouseRules(),
+  Validator.validateInput,
+  houseController.createInfos
+);
+houseRouter.get("/getallhouse", houseController.getAllhouseInfos);
 
 
-dataRouter.post("/mate", dataController.createMate);
-dataRouter.get("/getmate", dataController.getAllMates);
-dataRouter.get("/:id", dataController.getOneMate);
-dataRouter.delete("/:id", dataController.deleteOneMate);
-dataRouter.get("/:id", dataController.getOnehouseInfos);
-dataRouter.delete("/:id", dataController.deleteOnehouseInfos);
+houseRouter.get("/:id", houseController.getOnehouseInfos);
+houseRouter.delete("/:id", houseController.deleteOnehouseInfos);
 
 
-export default dataRouter;
+export default houseRouter;

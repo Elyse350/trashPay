@@ -3,33 +3,27 @@ const userSchema = new mongoose.Schema(  // Scheam is a format or a structure of
      {
        firstName:String,
        lastName:String,
-       email: {
-           type:String,
-           required:true,
-           unique:true,
-       },
-       phone:String,
+      
        password:{
            type:String,
            required:true,
        },
-       address:{
-           type:String,
-           default:"Rwanda"
-        },
-       gender:{
-           type:String,
-           enum:["male","female","other","not-say"],  //enum list data to be registered inside these data no other data will be rejected
-       }, 
-     
-    // role:{
-    //     type:String,
-    //     enum:["admin","user"],
-    //     default:"user"
-    //    }
+       phone: {
+        type:String,
+        required:true,
+        unique:true,
+    },
+    
+       
+      
+    role:{
+        type:String,
+        enum:["Admin","Tenant","Landlord"],
+        default:"Admin"
+       }
     },
        {
-           timestamps: true,  // means igihe byabereye stored
+           timestamps: true, 
        }
 )
 const user = mongoose.model('User',userSchema)

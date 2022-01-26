@@ -1,29 +1,29 @@
 import mongoose from 'mongoose';
-const houseSchema = new mongoose.Schema(  // Scheam is a format or a structure of our model, it will generate our model in db
+const houseSchema = new mongoose.Schema(
     {
-        landLordName:{
-            type:String,
-            required:true
-        },
-        numberofhouse:{
-            type:Number,
-            required:true
-        },
-        houseNumber:{
-            type:Number,
-            required:true
-
-        },
-        payement:{
-            type:String,
-            enum:["pending","paid","not paid"],
-        default:"pending"
-
-        },
         
+        houseNo:{
+            type:String,
+            required:true
+        },
+        district:{
+            type:String,
+            required:true
+        },
+        sector:{
+            type:String,
+            required:true
+
+        },
+        landLordId:{
+            type:mongoose.Schema.ObjectId,
+            ref:"Landlord",
+            require:true
+        },
+       
     },
        {
-           timestamps: true,  // means igihe byabereye stored
+           timestamps: true, 
        }
 );
 
